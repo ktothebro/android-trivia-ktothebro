@@ -20,29 +20,46 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import com.example.android.navigation.databinding.ActivityMainBinding;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private NavController mNavController;
+    private DrawerLayout mDrawerLayout;
+    private NavHostFragment mNavHostFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        mDrawerLayout = binding.drawerLayout;
         FragmentManager fragmentManager = getSupportFragmentManager();
-        NavHostFragment navHostFragment = (NavHostFragment) fragmentManager.findFragmentById(R.id.fragmentContainerView);
-        mNavController = navHostFragment.getNavController();
-        NavigationUI.setupActionBarWithNavController(this, mNavController);
+        mNavHostFragment = (NavHostFragment) fragmentManager.findFragmentById(R.id.fragmentContainerView);
+        mNavController = mNavHostFragment.getNavController();
+        NavigationUI.setupActionBarWithNavController(this, mNavController, mDrawerLayout);
+        NavigationView navView = findViewById(R.id.navView);
+        NavigationUI.setupWithNavController(navView, mNavController);
+
+        AppBarConfiguration appBarConfiguration =
+                new AppBarConfiguration.Builder(mNavController.getGraph())
+                        .setDrawerLayout(mDrawerLayout)
+                        .build();
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        return mNavController.navigateUp();
+
+        return NavigationUI.navigateUp(mNavController, mDrawerLayout);
     }
 }
 

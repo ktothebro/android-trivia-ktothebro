@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<!--
   ~ Copyright 2018, The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,16 +28,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/playButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/button_padding"
+            android:paddingEnd="@dimen/button_padding"
+            android:text="Play"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/button_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rulesText" />
+
         <ImageView
             android:id="@+id/rulesImage"
             android:layout_width="0dp"
             android:layout_height="@dimen/image_header_height"
             android:layout_marginStart="@dimen/horizontal_margin"
-            android:layout_marginTop="@dimen/vertical_margin"
             android:layout_marginEnd="@dimen/horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.066"
             app:srcCompat="@drawable/trivia_rules" />
 
         <TextView
@@ -47,8 +67,11 @@
             android:layout_marginEnd="@dimen/horizontal_margin"
             android:text="@string/rules_text"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toTopOf="@+id/playButton2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rulesImage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
+</layout>

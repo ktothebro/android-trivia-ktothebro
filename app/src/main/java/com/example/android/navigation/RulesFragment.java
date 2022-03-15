@@ -16,59 +16,35 @@
 
 package com.example.android.navigation;
 
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.databinding.DataBindingUtil;
+
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 
-import com.example.android.navigation.databinding.FragmentTitleBinding;
+import com.example.android.navigation.databinding.FragmentRulesBinding;
 
 
-public class TitleFragment extends Fragment {
-
+public class RulesFragment extends Fragment {
     private NavController mNavController;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentTitleBinding binding = FragmentTitleBinding.inflate(inflater);
+        FragmentRulesBinding binding = FragmentRulesBinding.inflate(inflater);
         mNavController = NavHostFragment.findNavController(this);
-        binding.playButton.setOnClickListener(new View.OnClickListener() {
+        binding.playButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mNavController.navigate(R.id.action_titleFragment_to_gameFragment);
+                mNavController.navigate(R.id.action_rulesFragment_to_gameFragment);
             }
         });
-        binding.ruleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mNavController.navigate(R.id.action_titleFragment_to_rulesFragment);
-            }
-        });
-        setHasOptionsMenu(true);
+
         return binding.getRoot();
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.options_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return NavigationUI.onNavDestinationSelected(item, mNavController);
     }
 }
