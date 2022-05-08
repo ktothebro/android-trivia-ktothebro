@@ -17,6 +17,7 @@
 package com.example.android.navigation;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,27 +40,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
-        mDrawerLayout = binding.drawerLayout;
+        setContentView(binding.getRoot());
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         mNavHostFragment = (NavHostFragment) fragmentManager.findFragmentById(R.id.fragmentContainerView);
         mNavController = mNavHostFragment.getNavController();
-        NavigationUI.setupActionBarWithNavController(this, mNavController, mDrawerLayout);
-        NavigationView navView = findViewById(R.id.navView);
+        NavigationView navView = binding.navView;
         NavigationUI.setupWithNavController(navView, mNavController);
 
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(mNavController.getGraph())
-                        .setDrawerLayout(mDrawerLayout)
-                        .build();
+        mDrawerLayout = binding.drawerLayout;
+        NavigationUI.setupActionBarWithNavController(this, mNavController, mDrawerLayout);
+
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-
+        if(mDrawerLayout.isOpen()){
+            mDrawerLayout.close();
+            return false;
+        }
         return NavigationUI.navigateUp(mNavController, mDrawerLayout);
     }
 }
-
